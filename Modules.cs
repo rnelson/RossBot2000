@@ -30,10 +30,18 @@ public class Modules : ModuleBase<SocketCommandContext>
 	[Command("SavingThrow")]
 	[Alias("d20st")]
 	[Summary("Rolls a saving throw.")]
-	public Task SavingThrowAsync() =>
-		ReplyAsync(Winners.Contains(Context.User.Id)
-			? $"You rolled a: {_random.Next(16, 21)}"
+	public Task SavingThrowAsync()
+	{
+		if (Winners.Contains(Context.User.Id))
+		{
+			return ReplyAsync($"You rolled a: {_random.Next(16, 21)}");
+		}
+
+		var luck = _random.NextDouble();
+		return ReplyAsync(luck >= 0.75
+			? $"You rolled a: {_random.Next(1, 21)}"
 			: $"You rolled a: {_random.Next(1, 10)}");
+	}
 
 	[Command("mayonnaise")]
 	[Alias("mayo")]
