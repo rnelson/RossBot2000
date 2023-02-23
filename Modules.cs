@@ -9,12 +9,12 @@ public class Modules : ModuleBase<SocketCommandContext>
 {
 	private const ulong RossId = 329744102189039618UL; // :-)
 	private readonly Random _random = new();
-	
+
 	[Command("source")]
 	[Summary("Links to the bot's source code.")]
 	public Task SourceAsync()
 		=> ReplyAsync("My source is available at https://github.com/rnelson/RossBot2000");
-	
+
 	[Command("aioli")]
 	[Alias("aaiga")]
 	[Summary("Informs Austin that all aioli is, in fact, garlic aioli.")]
@@ -25,77 +25,79 @@ public class Modules : ModuleBase<SocketCommandContext>
 	[Alias("d20st")]
 	[Summary("Rolls a saving throw.")]
 	public Task SavingThrowAsync() =>
-		ReplyAsync(RossId == Context.User.Id ?
-			$"You rolled a: {_random.Next(16, 21)}" :
-			$"You rolled a: {_random.Next(1, 10)}");
-	
+		ReplyAsync(RossId == Context.User.Id
+			? $"You rolled a: {_random.Next(16, 21)}"
+			: $"You rolled a: {_random.Next(1, 10)}");
+
 	[Command("mayonnaise")]
 	[Alias("mayo")]
 	[Summary("Provide some poignant thoughts on that condiment.")]
 	public Task MayoAsync()
 		=> ReplyAsync("https://tenor.com/view/disappointed-sigh-whatever-not-surprised-gif-22918448");
-	
+
 	[Command("help")]
-    [Summary("Gets help on using the bot.")]
-    public async Task HelpCommand([Remainder] string command = "")
-    {
-        var embed = new EmbedBuilder()
-        {
-            Title = "This is the list of all commands for this bot",
-            Color = new Color(10, 180, 10)
-        };
+	[Summary("Gets help on using the bot.")]
+	public async Task HelpCommand([Remainder] string command = "")
+	{
+		var embed = new EmbedBuilder()
+		{
+			Title = "This is the list of all commands for this bot",
+			Color = new Color(10, 180, 10)
+		};
 
-        var modules = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(ModuleBase<SocketCommandContext>))).ToList();
+		var modules = Assembly.GetExecutingAssembly().GetTypes()
+			.Where(t => t.IsSubclassOf(typeof(ModuleBase<SocketCommandContext>))).ToList();
 
-        var description = new StringBuilder();
-        description.AppendLine();
+		var description = new StringBuilder();
+		description.AppendLine();
 
-        modules.ForEach(t =>
-        {
-            var moduleName = t.Name.Remove(t.Name.IndexOf("Module"));
-            description.AppendLine($"**{moduleName} Commands**");
-         
-            var methods = t.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
+		modules.ForEach(t =>
+		{
+			var moduleName = t.Name.Remove(t.Name.IndexOf("Module"));
+			description.AppendLine($"**{moduleName} Commands**");
 
-            var group = t.GetCustomAttribute<GroupAttribute>();
+			var methods = t.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
 
-            methods.ForEach(mi =>
-            {
-                var command = mi.GetCustomAttribute<CommandAttribute>();
-                if (command == null) return;
+			var group = t.GetCustomAttribute<GroupAttribute>();
 
-                var summary = mi.GetCustomAttribute<SummaryAttribute>();
-                var aliases = mi.GetCustomAttribute<AliasAttribute>();
-                var groupName = "";
-                var commandPrefix = "!rb";
+			methods.ForEach(mi =>
+			{
+				var command = mi.GetCustomAttribute<CommandAttribute>();
+				if (command == null) return;
 
-                if (group != null) groupName = group.Prefix + " ";
+				var summary = mi.GetCustomAttribute<SummaryAttribute>();
+				var aliases = mi.GetCustomAttribute<AliasAttribute>();
+				var groupName = "";
+				var commandPrefix = "!rb";
 
-                description.Append($"**{commandPrefix}{groupName}{command.Text}**");
+				if (group != null) groupName = group.Prefix + " ";
 
-                if (aliases != null)
-                    Array.ForEach(aliases.Aliases, a => description.Append($" or **{commandPrefix}{groupName}{(a == "**" ? "\\*\\*" : a)}**"));
+				description.Append($"**{commandPrefix}{groupName}{command.Text}**");
 
-                if (summary != null)
-                    description.Append($"\n{summary.Text}");
+				if (aliases != null)
+					Array.ForEach(aliases.Aliases,
+						a => description.Append($" or **{commandPrefix}{groupName}{(a == "**" ? "\\*\\*" : a)}**"));
 
-                description.AppendLine("\n");
-            });
-        });
+				if (summary != null)
+					description.Append($"\n{summary.Text}");
 
-        embed.Description = description.ToString();
+				description.AppendLine("\n");
+			});
+		});
 
-        await ReplyAsync(embed: embed.Build());
-    }
+		embed.Description = description.ToString();
 
-    private Color GetColorFromSting(string str)
-    {
-        var dividerIndex = (int)Math.Floor(str.Length / 3d);
+		await ReplyAsync(embed: embed.Build());
+	}
 
-        var r = Math.Abs(str.Substring(0, dividerIndex).GetHashCode() % 255);
-        var g = Math.Abs(str.Substring(dividerIndex, 2 * dividerIndex).GetHashCode() % 255);
-        var b = Math.Abs(str.Remove(0, 2 * dividerIndex).GetHashCode() % 255);
+	private Color GetColorFromSting(string str)
+	{
+		var dividerIndex = (int)Math.Floor(str.Length / 3d);
 
-        return new Color(r, g, b);
-    }
+		var r = Math.Abs(str.Substring(0, dividerIndex).GetHashCode() % 255);
+		var g = Math.Abs(str.Substring(dividerIndex, 2 * dividerIndex).GetHashCode() % 255);
+		var b = Math.Abs(str.Remove(0, 2 * dividerIndex).GetHashCode() % 255);
+
+		return new Color(r, g, b);
+	}
 }
