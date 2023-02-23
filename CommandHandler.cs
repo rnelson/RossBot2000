@@ -38,19 +38,17 @@ public class CommandHandler
     private async Task HandleCommandAsync(SocketMessage messageParam)
     {
         // Don't process the command if it was a system message
-        if (messageParam is not SocketUserMessage message)
+        if (messageParam is not SocketUserMessage { Channel: SocketGuildChannel channel } message)
             return;
 
         // Getting the Guild to fetch the command prefix
-        if (message.Channel is not SocketGuildChannel channel)
-            return;
-        var guild = channel.Guild.Id;
+        _ = channel.Guild.Id;
 
         // Create a number to track where the prefix ends and the command begins
-        int argPos = 0;
+        var argPos = 0;
 
         // Determine if the message is a command based on the prefix and make sure no bots trigger commands
-        if (!(message.HasStringPrefix("!rb", ref argPos) ||
+        if (!(message.HasStringPrefix(Constants.COMMAND_PREFIX, ref argPos) ||
             message.HasMentionPrefix(_client.CurrentUser, ref argPos)) ||
             message.Author.IsBot)
             return;

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
 using Discord;
@@ -5,13 +6,18 @@ using Discord.Commands;
 
 namespace RossBot2000;
 
+[SuppressMessage("ReSharper", "UnusedType.Global")]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public class Modules : ModuleBase<SocketCommandContext>
 {
-	private const ulong RossId = 329744102189039618UL; // :-)
 	private readonly Random _random = new();
+	private readonly ulong[] Winners =
+	{
+		329744102189039618UL // Ross
+	};
 
 	[Command("source")]
-	[Summary("Links to the bot's source code.")]
+	[Summary("Links to the source code for this bot.")]
 	public Task SourceAsync()
 		=> ReplyAsync("My source is available at https://github.com/rnelson/RossBot2000");
 
@@ -21,11 +27,11 @@ public class Modules : ModuleBase<SocketCommandContext>
 	public Task AioliAsync()
 		=> ReplyAsync("Well actually, ALL aioli is garlic aioli!");
 
-	[Command("savingthrow")]
+	[Command("SavingThrow")]
 	[Alias("d20st")]
 	[Summary("Rolls a saving throw.")]
 	public Task SavingThrowAsync() =>
-		ReplyAsync(RossId == Context.User.Id
+		ReplyAsync(Winners.Contains(Context.User.Id)
 			? $"You rolled a: {_random.Next(16, 21)}"
 			: $"You rolled a: {_random.Next(1, 10)}");
 
@@ -37,23 +43,27 @@ public class Modules : ModuleBase<SocketCommandContext>
 
 	[Command("help")]
 	[Summary("Gets help on using the bot.")]
-	public async Task HelpCommand([Remainder] string command = "")
+	[SuppressMessage("ReSharper", "UnusedParameter.Global")]
+	public async Task HelpCommand([Remainder] string args = "")
 	{
-		var embed = new EmbedBuilder()
+		var embed = new EmbedBuilder
 		{
 			Title = "This is the list of all commands for this bot",
 			Color = new Color(10, 180, 10)
 		};
 
-		var modules = Assembly.GetExecutingAssembly().GetTypes()
-			.Where(t => t.IsSubclassOf(typeof(ModuleBase<SocketCommandContext>))).ToList();
+		var modules = Assembly
+			.GetExecutingAssembly()
+			.GetTypes()
+			.Where(t => t.IsSubclassOf(typeof(ModuleBase<SocketCommandContext>)))
+			.ToList();
 
 		var description = new StringBuilder();
 		description.AppendLine();
 
 		modules.ForEach(t =>
 		{
-			var moduleName = t.Name.Remove(t.Name.IndexOf("Module"));
+			var moduleName = t.Name.Remove(t.Name.IndexOf("Module", StringComparison.CurrentCulture));
 			description.AppendLine($"**{moduleName} Commands**");
 
 			var methods = t.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
@@ -63,20 +73,20 @@ public class Modules : ModuleBase<SocketCommandContext>
 			methods.ForEach(mi =>
 			{
 				var command = mi.GetCustomAttribute<CommandAttribute>();
-				if (command == null) return;
+				if (command == null)
+					return;
 
 				var summary = mi.GetCustomAttribute<SummaryAttribute>();
 				var aliases = mi.GetCustomAttribute<AliasAttribute>();
 				var groupName = "";
-				var commandPrefix = "!rb";
 
 				if (group != null) groupName = group.Prefix + " ";
 
-				description.Append($"**{commandPrefix}{groupName}{command.Text}**");
+				description.Append($"**{Constants.COMMAND_PREFIX}{groupName}{command.Text}**");
 
 				if (aliases != null)
 					Array.ForEach(aliases.Aliases,
-						a => description.Append($" or **{commandPrefix}{groupName}{(a == "**" ? "\\*\\*" : a)}**"));
+						a => description.Append($" or **{Constants.COMMAND_PREFIX}{groupName}{(a == "**" ? "\\*\\*" : a)}**"));
 
 				if (summary != null)
 					description.Append($"\n{summary.Text}");
@@ -88,16 +98,5 @@ public class Modules : ModuleBase<SocketCommandContext>
 		embed.Description = description.ToString();
 
 		await ReplyAsync(embed: embed.Build());
-	}
-
-	private Color GetColorFromSting(string str)
-	{
-		var dividerIndex = (int)Math.Floor(str.Length / 3d);
-
-		var r = Math.Abs(str.Substring(0, dividerIndex).GetHashCode() % 255);
-		var g = Math.Abs(str.Substring(dividerIndex, 2 * dividerIndex).GetHashCode() % 255);
-		var b = Math.Abs(str.Remove(0, 2 * dividerIndex).GetHashCode() % 255);
-
-		return new Color(r, g, b);
 	}
 }

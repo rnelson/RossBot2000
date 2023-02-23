@@ -37,25 +37,25 @@ public class DiscordClient
 
 	private async Task ClientOnLog(LogMessage arg)
 	{
-		_logger.LogDebug(arg.Message);
+		_logger.LogDebug("{Message}", arg.Message);
 		await Task.Delay(0);
 	}
 	
-	private async Task MessageReceived(SocketMessage msg)
+	private static async Task MessageReceived(SocketMessage message)
 	{
 		await Task.Run(() =>
 		{
-			Console.WriteLine($"[{msg.Timestamp.ToString()}] #{msg.Channel} {msg.Author}): {msg.Content}");
+			Console.WriteLine($"[{message.Timestamp.ToString()}] #{message.Channel} {message.Author}): {message.Content}");
 			return Task.CompletedTask;
 		});
 	}
 
-	private async Task MessageUpdated(Cacheable<IMessage, ulong> before, SocketMessage after, ISocketMessageChannel channel)
+	private static async Task MessageUpdated(Cacheable<IMessage, ulong> before, SocketMessage after, ISocketMessageChannel channel)
 	{
 		await Task.Run(async () =>
 		{
 			var message = await before.GetOrDownloadAsync();
-			Console.WriteLine($"({message.Channel}, {message.Author}): {message} -> {after}");
+			Console.WriteLine($"[{message.Timestamp.ToString()}] #{message.Channel} {message.Author}): {message} -> {after}");
 		});
 	}
 }
