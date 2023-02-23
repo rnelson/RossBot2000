@@ -35,7 +35,7 @@ public class InfoModule : ModuleBase<SocketCommandContext>
 		
 		var embed = new EmbedBuilder
 		{
-			Title = "RossBot5000",
+			Title = "RossBot2000",
 			Color = new Color(87, 5, 116),
 			Description = description.ToString()
 		};
