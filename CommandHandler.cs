@@ -28,7 +28,7 @@ public class CommandHandler
     private async Task HandleCommandAsync(SocketMessage messageParam)
     {
         // Don't process the command if it was a system message
-        if (messageParam is not SocketUserMessage { Channel: SocketGuildChannel channel } message)
+        if (messageParam is not SocketUserMessage { Channel: SocketGuildChannel } message)
             return;
 
         // Create a number to track where the prefix ends and the command begins
