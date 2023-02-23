@@ -4,51 +4,12 @@ using System.Text;
 using Discord;
 using Discord.Commands;
 
-namespace RossBot2000;
+namespace RossBot2000.Modules;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class Modules : ModuleBase<SocketCommandContext>
+public class HelpModule : ModuleBase<SocketCommandContext>
 {
-	private readonly Random _random = new();
-	private readonly ulong[] Winners =
-	{
-		329744102189039618UL // Ross
-	};
-
-	[Command("source")]
-	[Summary("Links to the source code for this bot.")]
-	public Task SourceAsync()
-		=> ReplyAsync("My source is available at https://github.com/rnelson/RossBot2000");
-
-	[Command("aioli")]
-	[Alias("aaiga")]
-	[Summary("Informs Austin that all aioli is, in fact, garlic aioli.")]
-	public Task AioliAsync()
-		=> ReplyAsync("Well actually, ALL aioli is garlic aioli!");
-
-	[Command("SavingThrow")]
-	[Alias("d20st")]
-	[Summary("Rolls a saving throw.")]
-	public Task SavingThrowAsync()
-	{
-		if (Winners.Contains(Context.User.Id))
-		{
-			return ReplyAsync($"You rolled a: {_random.Next(16, 21)}");
-		}
-
-		var luck = _random.NextDouble();
-		return ReplyAsync(luck >= 0.75
-			? $"You rolled a: {_random.Next(1, 21)}"
-			: $"You rolled a: {_random.Next(1, 10)}");
-	}
-
-	[Command("mayonnaise")]
-	[Alias("mayo")]
-	[Summary("Provide some poignant thoughts on that condiment.")]
-	public Task MayoAsync()
-		=> ReplyAsync("https://tenor.com/view/disappointed-sigh-whatever-not-surprised-gif-22918448");
-
 	[Command("help")]
 	[Summary("Gets help on using the bot.")]
 	[SuppressMessage("ReSharper", "UnusedParameter.Global")]
