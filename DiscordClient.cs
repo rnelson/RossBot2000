@@ -10,7 +10,6 @@ public class DiscordClient
 	private readonly ILogger<DiscordClient> _logger;
 	private readonly DiscordSocketClient _client;
 	private readonly IServiceProvider _services;
-	private readonly string _token;
 
 	public DiscordClient(BotConfiguration configuration,
 		ILogger<DiscordClient> logger,
@@ -19,8 +18,6 @@ public class DiscordClient
 		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 		_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		_services = services ?? throw new ArgumentNullException(nameof(services));
-
-		_token = File.ReadAllText(".discord.token").Trim();
 
 		_client = new DiscordSocketClient(new DiscordSocketConfig { GatewayIntents = GatewayIntents.All });
 		_client.Log += ClientOnLog;
@@ -32,7 +29,7 @@ public class DiscordClient
 		var handler = new CommandHandler(_configuration, _services, _client, commandService);
 		
 		await handler.InstallCommandsAsync();
-		await _client.LoginAsync(TokenType.Bot, _token);
+		await _client.LoginAsync(TokenType.Bot, _configuration.DiscordToken);
 		await _client.StartAsync();
 		
 		_client.MessageUpdated += MessageUpdated;

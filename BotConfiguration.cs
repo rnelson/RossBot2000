@@ -7,6 +7,7 @@ public class BotConfiguration
 	private readonly ILogger<BotConfiguration> _logger;
 	private readonly IConfiguration _configuration;
 
+	internal string DiscordToken { get; private set; }
 	public string BotName { get; private set; } = Constants.DEFAULT_BOT_NAME;
 	public string CommandPrefix { get; private set; } = Constants.DEFAULT_COMMAND_PREFIX;
 	
@@ -14,6 +15,15 @@ public class BotConfiguration
 	{
 		_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+
+		try
+		{
+			DiscordToken = _configuration["Discord:Token"]!.Trim();
+		}
+		catch
+		{
+			DiscordToken = string.Empty;
+		}
 
 		try
 		{
@@ -34,7 +44,6 @@ public class BotConfiguration
 		}
 
 		var message = new StringBuilder();
-		
 		message.AppendLine($"Loaded configuration for {BotName}:");
 		message.AppendLine($"\tCommand Prefix: {CommandPrefix}");
 		_logger.LogInformation(message!.ToString());
