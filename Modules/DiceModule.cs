@@ -32,7 +32,9 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 			if (ids is null)
 				throw new Exception("no winners found");
 			
-			Winners.AddRange(ids.ToList());
+			Winners.AddRange(ids
+				.Where(id => !Winners.Contains(id))
+				.ToList());
 		}
 		catch
 		{
