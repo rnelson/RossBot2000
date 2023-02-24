@@ -2,5 +2,6 @@ namespace RossBot2000;
 
 public static class Constants
 {
-	public const string COMMAND_PREFIX = @"!rb";
+	public const string DEFAULT_BOT_NAME = @"RossBot2000";
+	public const string DEFAULT_COMMAND_PREFIX = @"!rb";
 }

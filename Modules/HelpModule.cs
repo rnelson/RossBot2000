@@ -10,6 +10,13 @@ namespace RossBot2000.Modules;
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 public class HelpModule : ModuleBase<SocketCommandContext>
 {
+	private readonly BotConfiguration _configuration;
+
+	public HelpModule(BotConfiguration configuration)
+	{
+		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+	}
+	
 	[Command("help")]
 	[Summary("Gets help on using the bot.")]
 	[SuppressMessage("ReSharper", "UnusedParameter.Global")]
@@ -17,7 +24,7 @@ public class HelpModule : ModuleBase<SocketCommandContext>
 	{
 		var embed = new EmbedBuilder
 		{
-			Title = "This is the list of all commands for this bot",
+			Title = $"This is the list of all commands for {_configuration.BotName}",
 			Color = new Color(10, 180, 10)
 		};
 
@@ -51,11 +58,11 @@ public class HelpModule : ModuleBase<SocketCommandContext>
 
 				if (group != null) groupName = group.Prefix + " ";
 
-				description.Append($"**{Constants.COMMAND_PREFIX}{groupName}{command.Text}**");
+				description.Append($"**{_configuration.CommandPrefix}{groupName}{command.Text}**");
 
 				if (aliases != null)
 					Array.ForEach(aliases.Aliases,
-						a => description.Append($" or **{Constants.COMMAND_PREFIX}{groupName}{(a == "**" ? "\\*\\*" : a)}**"));
+						a => description.Append($" or **{_configuration.CommandPrefix}{groupName}{(a == "**" ? "\\*\\*" : a)}**"));
 
 				if (summary != null)
 					description.Append($"\n{summary.Text}");

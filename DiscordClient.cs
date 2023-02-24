@@ -6,13 +6,17 @@ namespace RossBot2000;
 
 public class DiscordClient
 {
+	private readonly BotConfiguration _configuration;
 	private readonly ILogger<DiscordClient> _logger;
 	private readonly DiscordSocketClient _client;
 	private readonly IServiceProvider _services;
 	private readonly string _token;
 
-	public DiscordClient(ILogger<DiscordClient> logger, IServiceProvider services)
+	public DiscordClient(BotConfiguration configuration,
+		ILogger<DiscordClient> logger,
+		IServiceProvider services)
 	{
+		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 		_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		_services = services ?? throw new ArgumentNullException(nameof(services));
 
@@ -25,7 +29,7 @@ public class DiscordClient
 	public async Task Login()
 	{
 		var commandService = new CommandService();
-		var handler = new CommandHandler(_services, _client, commandService);
+		var handler = new CommandHandler(_configuration, _services, _client, commandService);
 		
 		await handler.InstallCommandsAsync();
 		await _client.LoginAsync(TokenType.Bot, _token);

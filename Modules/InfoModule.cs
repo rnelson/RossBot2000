@@ -9,6 +9,13 @@ namespace RossBot2000.Modules;
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 public class InfoModule : ModuleBase<SocketCommandContext>
 {
+	private readonly BotConfiguration _configuration;
+
+	public InfoModule(BotConfiguration configuration)
+	{
+		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+	}
+	
 	[Command("about")]
 	[Summary("About this bot.")]
 	public async Task AboutAsync()
@@ -35,7 +42,7 @@ public class InfoModule : ModuleBase<SocketCommandContext>
 		
 		var embed = new EmbedBuilder
 		{
-			Title = "RossBot2000",
+			Title = _configuration.BotName,
 			Color = new Color(87, 5, 116),
 			Description = description.ToString()
 		};
@@ -46,5 +53,5 @@ public class InfoModule : ModuleBase<SocketCommandContext>
 	[Command("source")]
 	[Summary("Links to the source code for this bot.")]
 	public Task SourceAsync()
-		=> ReplyAsync("My source code (MIT licensed) is available at https://github.com/rnelson/RossBot2000");
+		=> ReplyAsync("The original bot source code (MIT licensed) is available at https://github.com/rnelson/RossBot2000");
 }

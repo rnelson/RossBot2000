@@ -6,16 +6,21 @@ namespace RossBot2000;
 
 public class CommandHandler
 {
+    private readonly BotConfiguration _configuration;
     private readonly IServiceProvider _services;
     private readonly DiscordSocketClient _client;
     private readonly CommandService _commands;
 
     // Retrieve client and CommandService instance via ctor
-    public CommandHandler(IServiceProvider services, DiscordSocketClient client, CommandService commands)
+    public CommandHandler(BotConfiguration configuration,
+        IServiceProvider services,
+        DiscordSocketClient client,
+        CommandService commands)
     {
-        _services = services;
-        _commands = commands;
-        _client = client;
+        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        _services = services ?? throw new ArgumentNullException(nameof(services));
+        _commands = commands ?? throw new ArgumentNullException(nameof(commands));
+        _client = client ?? throw new ArgumentNullException(nameof(client));
     }
 
     public async Task InstallCommandsAsync()
@@ -35,7 +40,7 @@ public class CommandHandler
         var argPos = 0;
 
         // Determine if the message is a command based on the prefix and make sure no bots trigger commands
-        if (!(message.HasStringPrefix(Constants.COMMAND_PREFIX, ref argPos) ||
+        if (!(message.HasStringPrefix(_configuration.CommandPrefix, ref argPos) ||
             message.HasMentionPrefix(_client.CurrentUser, ref argPos)) ||
             message.Author.IsBot)
             return;
