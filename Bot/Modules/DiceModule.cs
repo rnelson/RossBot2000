@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Discord.Commands;
 
-namespace RossBot2000.Modules;
+namespace RossBot2000.Bot.Modules;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]

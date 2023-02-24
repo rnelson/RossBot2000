@@ -1,3 +1,5 @@
+using RossBot2000.Bot;
+
 namespace RossBot2000;
 
 public class Worker : BackgroundService
@@ -13,7 +15,7 @@ public class Worker : BackgroundService
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
-		_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+		_logger.LogInformation("Worker running at: {Time}", DateTimeOffset.Now);
 		await _discord.Login();
 		
 		while (!stoppingToken.IsCancellationRequested)

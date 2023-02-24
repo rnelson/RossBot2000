@@ -3,7 +3,7 @@ using System.Text;
 using Discord;
 using Discord.Commands;
 
-namespace RossBot2000.Modules;
+namespace RossBot2000.Bot.Modules;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]

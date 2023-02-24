@@ -1,4 +1,4 @@
-namespace RossBot2000;
+namespace RossBot2000.Bot;
 
 public static class Constants
 {

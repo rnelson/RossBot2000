@@ -2,7 +2,7 @@ using System.Reflection;
 using Discord.Commands;
 using Discord.WebSocket;
 
-namespace RossBot2000;
+namespace RossBot2000.Bot;
 
 public class CommandHandler
 {

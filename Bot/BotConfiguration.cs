@@ -1,15 +1,17 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace RossBot2000;
+namespace RossBot2000.Bot;
 
+[SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
 public class BotConfiguration
 {
 	private readonly ILogger<BotConfiguration> _logger;
 	private readonly IConfiguration _configuration;
 
-	internal string DiscordToken { get; private set; }
-	public string BotName { get; private set; } = Constants.DEFAULT_BOT_NAME;
-	public string CommandPrefix { get; private set; } = Constants.DEFAULT_COMMAND_PREFIX;
+	internal string DiscordToken { get; }
+	public string BotName { get; } = Constants.DEFAULT_BOT_NAME;
+	public string CommandPrefix { get; } = Constants.DEFAULT_COMMAND_PREFIX;
 	
 	public BotConfiguration(ILogger<BotConfiguration> logger, IConfiguration configuration)
 	{
@@ -46,6 +48,6 @@ public class BotConfiguration
 		var message = new StringBuilder();
 		message.AppendLine($"Loaded configuration for {BotName}:");
 		message.AppendLine($"\tCommand Prefix: {CommandPrefix}");
-		_logger.LogInformation(message!.ToString());
+		_logger.LogInformation("{Message}", message.ToString());
 	}
 }

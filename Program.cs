@@ -1,4 +1,5 @@
 using RossBot2000;
+using RossBot2000.Bot;
 
 var host = Host.CreateDefaultBuilder(args)
 	.ConfigureServices(services =>
