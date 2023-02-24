@@ -57,4 +57,22 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 			? $"You rolled a: {_random.Next(1, 21)}"
 			: $"You rolled a: {_random.Next(1, 10)}");
 	}
+	
+	[Command("d")]
+	[Alias("roll")]
+	[Summary("Rolls an N-sided die.")]
+	public Task RollAsync([Remainder] string args = "")
+	{
+		try
+		{
+			var bits = args.Split(new[] {' ', '\t'});
+			var sides = long.Parse(bits[0]);
+			
+			return ReplyAsync($"You rolled a: {_random.NextInt64(1L, sides + 1)}");
+		}
+		catch (Exception e)
+		{
+			return ReplyAsync($"You broke me! {e.Message}");
+		}
+	}
 }
