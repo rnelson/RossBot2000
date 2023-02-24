@@ -49,13 +49,13 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 	{
 		if (Winners.Contains(Context.User.Id))
 		{
-			return ReplyAsync($"You rolled a: {_random.Next(16, 21)}");
+			return ReplyAsync($"You rolled a {_random.Next(16, 21)}");
 		}
 
 		var luck = _random.NextDouble();
 		return ReplyAsync(luck >= 0.75
-			? $"You rolled a: {_random.Next(1, 21)}"
-			: $"You rolled a: {_random.Next(1, 10)}");
+			? $"You rolled a {_random.Next(1, 21)}"
+			: $"You rolled a {_random.Next(1, 10)}");
 	}
 	
 	[Command("d")]
@@ -68,7 +68,7 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 			var bits = args.Split(new[] {' ', '\t'});
 			var sides = long.Parse(bits[0]);
 			
-			return ReplyAsync($"You rolled a: {_random.NextInt64(1L, sides + 1)}");
+			return ReplyAsync($"You rolled a {_random.NextInt64(1L, sides + 1)}");
 		}
 		catch (Exception e)
 		{
