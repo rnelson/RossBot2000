@@ -23,6 +23,33 @@ add it to a server.
 6. Customize the `appsettings.json` file to your needs.
 7. Run the bot with `dotnet run`.
 
+### SystemD
+The contents of my `/etc/systemd/system/rossbot2000` are as follows:
+
+```ini
+[Unit]
+Description=RossBot2000
+DefaultDependencies=false
+Before=basic.target shutdown.target
+Conflicts=shutdown.target
+
+[Service]
+Type=notify
+User=rnelson
+Group=rnelson
+ExecStart=/bin/sh /opt/rossbot.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+The script it calls simply runs `dotnet run` with the specific environment I want:
+
+```shell
+#!/bin/sh
+(cd /opt/RossBot2000 && /opt/dotnet/dotnet run --environment RossBot2000)
+```
+
 ## License
 
 RossBot2000 is released under the [MIT License](http://rnelson.mit-license.org).
