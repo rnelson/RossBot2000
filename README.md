@@ -22,3 +22,7 @@ add it to a server.
 5. Add your bot to your server.
 6. Customize the `appsettings.json` file to your needs.
 7. Run the bot with `dotnet run`.
+
+## License
+
+RossBot2000 is released under the [MIT License](http://rnelson.mit-license.org).
