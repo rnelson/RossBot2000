@@ -21,4 +21,8 @@
         <PackageReference Include="Discord.Net" Version="3.9.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Content Include=".github\dependabot.yml" />
+    </ItemGroup>
 </Project>
