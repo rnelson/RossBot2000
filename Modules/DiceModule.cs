@@ -16,7 +16,11 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 	{
 		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-		Winners = new List<ulong>();
+		// Start with a permanent list of winners. ;-)
+		Winners = new List<ulong>
+		{
+			329744102189039618UL // rnelson#2876
+		};
 		
 		try
 		{
@@ -32,7 +36,7 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 		}
 		catch
 		{
-			Winners.Add(329744102189039618UL); // Ross
+			// Do nothing
 		}
 	}
 	
