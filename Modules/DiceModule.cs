@@ -65,7 +65,7 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 	{
 		try
 		{
-			var bits = args.Split(new[] {' ', '\t'});
+			var bits = args.Split(' ', '\t');
 			var sides = long.Parse(bits[0]);
 			
 			return ReplyAsync($"You rolled a {_random.NextInt64(1L, sides + 1)}");
