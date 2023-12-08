@@ -4,24 +4,16 @@ using Discord.WebSocket;
 
 namespace RossBot2000.Bot;
 
-public class CommandHandler
+public class CommandHandler(
+    BotConfiguration configuration,
+    IServiceProvider services,
+    DiscordSocketClient client,
+    CommandService commands)
 {
-    private readonly BotConfiguration _configuration;
-    private readonly IServiceProvider _services;
-    private readonly DiscordSocketClient _client;
-    private readonly CommandService _commands;
-
-    // Retrieve client and CommandService instance via ctor
-    public CommandHandler(BotConfiguration configuration,
-        IServiceProvider services,
-        DiscordSocketClient client,
-        CommandService commands)
-    {
-        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-        _services = services ?? throw new ArgumentNullException(nameof(services));
-        _commands = commands ?? throw new ArgumentNullException(nameof(commands));
-        _client = client ?? throw new ArgumentNullException(nameof(client));
-    }
+    private readonly BotConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+    private readonly IServiceProvider _services = services ?? throw new ArgumentNullException(nameof(services));
+    private readonly DiscordSocketClient _client = client ?? throw new ArgumentNullException(nameof(client));
+    private readonly CommandService _commands = commands ?? throw new ArgumentNullException(nameof(commands));
 
     public async Task InstallCommandsAsync()
     {

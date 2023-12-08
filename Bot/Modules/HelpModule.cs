@@ -8,15 +8,10 @@ namespace RossBot2000.Bot.Modules;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class HelpModule : ModuleBase<SocketCommandContext>
+public class HelpModule(BotConfiguration configuration) : ModuleBase<SocketCommandContext>
 {
-	private readonly BotConfiguration _configuration;
+	private readonly BotConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-	public HelpModule(BotConfiguration configuration)
-	{
-		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-	}
-	
 	[Command("help")]
 	[Summary("Gets help on using the bot.")]
 	[SuppressMessage("ReSharper", "UnusedParameter.Global")]
@@ -62,7 +57,7 @@ public class HelpModule : ModuleBase<SocketCommandContext>
 
 				if (aliases != null)
 					Array.ForEach(aliases.Aliases,
-						a => description.Append($" or **{_configuration.CommandPrefix}{groupName}{(a == "**" ? "\\*\\*" : a)}**"));
+						a => description.Append($" or **{_configuration.CommandPrefix}{groupName}{(a == "**" ? @"\*\*" : a)}**"));
 
 				if (summary != null)
 					description.Append($"\n{summary.Text}");

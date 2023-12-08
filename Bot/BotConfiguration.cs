@@ -10,8 +10,8 @@ public class BotConfiguration
 	private readonly IConfiguration _configuration;
 
 	internal string DiscordToken { get; }
-	public string BotName { get; } = Constants.DEFAULT_BOT_NAME;
-	public string CommandPrefix { get; } = Constants.DEFAULT_COMMAND_PREFIX;
+	public string BotName { get; }
+	public string CommandPrefix { get; }
 	
 	public BotConfiguration(ILogger<BotConfiguration> logger, IConfiguration configuration)
 	{
@@ -33,7 +33,7 @@ public class BotConfiguration
 		}
 		catch
 		{
-			CommandPrefix = Constants.DEFAULT_COMMAND_PREFIX;
+			CommandPrefix = Constants.DefaultCommandPrefix;
 		}
 		
 		try
@@ -42,7 +42,7 @@ public class BotConfiguration
 		}
 		catch
 		{
-			BotName = Constants.DEFAULT_BOT_NAME;
+			BotName = Constants.DefaultBotName;
 		}
 
 		var message = new StringBuilder();

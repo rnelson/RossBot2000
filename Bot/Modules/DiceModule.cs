@@ -10,14 +10,14 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 {
 	private readonly IConfiguration _configuration; 
 	private readonly Random _random = new();
-	private readonly List<ulong> Winners;
+	private readonly List<ulong> _winners;
 
 	public DiceModule(IConfiguration configuration)
 	{
 		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
 		// Start with a permanent list of winners. ;-)
-		Winners = new List<ulong>
+		_winners = new List<ulong>
 		{
 			329744102189039618UL // rnelson#2876
 		};
@@ -32,8 +32,8 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 			if (ids is null)
 				throw new Exception("no winners found");
 			
-			Winners.AddRange(ids
-				.Where(id => !Winners.Contains(id))
+			_winners.AddRange(ids
+				.Where(id => !_winners.Contains(id))
 				.ToList());
 		}
 		catch
@@ -47,7 +47,7 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 	[Summary("Rolls a saving throw.")]
 	public Task SavingThrowAsync()
 	{
-		if (Winners.Contains(Context.User.Id))
+		if (_winners.Contains(Context.User.Id))
 		{
 			return ReplyAsync($"You rolled a {_random.Next(16, 21)}");
 		}

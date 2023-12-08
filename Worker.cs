@@ -2,16 +2,10 @@ using RossBot2000.Bot;
 
 namespace RossBot2000;
 
-public class Worker : BackgroundService
+public class Worker(ILogger<Worker> logger, DiscordClient discord) : BackgroundService
 {
-	private readonly ILogger<Worker> _logger;
-	private readonly DiscordClient _discord;
-
-	public Worker(ILogger<Worker> logger, DiscordClient discord)
-	{
-		_logger = logger;
-		_discord = discord ?? throw new ArgumentNullException(nameof(discord));
-	}
+	private readonly ILogger<Worker> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+	private readonly DiscordClient _discord = discord ?? throw new ArgumentNullException(nameof(discord));
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{

@@ -7,15 +7,10 @@ namespace RossBot2000.Bot.Modules;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class InfoModule : ModuleBase<SocketCommandContext>
+public class InfoModule(BotConfiguration configuration) : ModuleBase<SocketCommandContext>
 {
-	private readonly BotConfiguration _configuration;
+	private readonly BotConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-	public InfoModule(BotConfiguration configuration)
-	{
-		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-	}
-	
 	[Command("about")]
 	[Summary("About this bot.")]
 	public async Task AboutAsync()
