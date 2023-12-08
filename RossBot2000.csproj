@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>dotnet-RossBot2000-5330297B-977C-490F-BD01-BE955E765572</UserSecretsId>
@@ -15,6 +15,7 @@
         <RepositoryUrl>https://github.com/rnelson/RossBot2000.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <Company>Libexec</Company>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
