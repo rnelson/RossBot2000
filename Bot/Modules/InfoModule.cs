@@ -33,11 +33,11 @@ public class InfoModule : ModuleBase<SocketCommandContext>
 		description.AppendLine("\n");
 		description.AppendLine("**Author**");
 		description.AppendLine("This useless little bot was written by Ross");
-		description.AppendLine("Nelson. rnelson#2876");
+		description.AppendLine("Nelson. *rnelson* on Discord (formerly *rnelson#2876*)");
 		description.AppendLine("\n");
 		description.AppendLine("**License**");
 		description.AppendLine("The RossBot2000 source code is available under");
-		description.AppendLine("the MIT license. See !rbsource.");
+		description.AppendLine($"the MIT license. See {_configuration.CommandPrefix}source.");
 		description.AppendLine("\n");
 		
 		var embed = new EmbedBuilder
