@@ -26,18 +26,15 @@ public class InfoModule : ModuleBase<SocketCommandContext>
 		description.AppendLine("Someone added Mee6 to a Discord server and");
 		description.AppendLine("created a custom command. When asked to create");
 		description.AppendLine("a second, they pointed out that you are limited");
-		description.AppendLine("to just one. After pointing out that they could");
-		description.AppendLine("easily make something to handle multiple commands,");
-		description.AppendLine("I figured I should probably make sure that it's");
-		description.AppendLine("actually easy. And thus RossBot2000 was born.");
+		description.AppendLine("to just one. Thus, RossBot2000 was born.");
 		description.AppendLine("\n");
 		description.AppendLine("**Author**");
 		description.AppendLine("This useless little bot was written by Ross");
-		description.AppendLine("Nelson. *rnelson* on Discord (formerly *rnelson#2876*)");
+		description.AppendLine("*rnelson* on Discord (formerly *rnelson#2876*)");
 		description.AppendLine("\n");
 		description.AppendLine("**License**");
 		description.AppendLine("The RossBot2000 source code is available under");
-		description.AppendLine($"the MIT license. See {_configuration.CommandPrefix}source.");
+		description.AppendLine($"the MIT license. See {_configuration.CommandPrefix}source for more details.");
 		description.AppendLine("\n");
 		
 		var embed = new EmbedBuilder
