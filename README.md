@@ -47,7 +47,7 @@ The script it calls simply runs `dotnet run` with the specific environment I wan
 
 ```shell
 #!/bin/sh
-(cd /opt/RossBot2000 && /opt/dotnet/dotnet run --environment RossBot2000)
+(cd /opt/RossBot2000 && dotnet run --environment RossBot2000)
 ```
 
 ## License
