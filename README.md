@@ -11,7 +11,7 @@ actually easy. And thus RossBot2000 was born.
 
 ## Requirements
 RossBot2000 is written in .NET 8 using the Discord.Net package. It will run on any system supported by 
-.NET 7. You will need to have an active Discord account to be able to create the application/bot and to 
+.NET 8. You will need to have an active Discord account to be able to create the application/bot and to 
 add it to a server.
 
 ## Usage
