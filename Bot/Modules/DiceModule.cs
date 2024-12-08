@@ -17,10 +17,7 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
 		// Start with a permanent list of winners. ;-)
-		_winners = new List<ulong>
-		{
-			329744102189039618UL // rnelson#2876
-		};
+		_winners = [329744102189039618UL];
 		
 		try
 		{
@@ -30,7 +27,7 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 				.Get<ulong[]>();
 
 			if (ids is null)
-				throw new Exception("no winners found");
+				throw new("no winners found");
 			
 			_winners.AddRange(ids
 				.Where(id => !_winners.Contains(id))

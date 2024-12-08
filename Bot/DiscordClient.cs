@@ -19,7 +19,7 @@ public class DiscordClient
 		_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		_services = services ?? throw new ArgumentNullException(nameof(services));
 
-		_client = new DiscordSocketClient(new DiscordSocketConfig { GatewayIntents = GatewayIntents.All });
+		_client = new(new() { GatewayIntents = GatewayIntents.All });
 		_client.Log += ClientOnLog;
 	}
 
