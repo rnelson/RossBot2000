@@ -62,10 +62,13 @@ public class DiceModule : ModuleBase<SocketCommandContext>
 	{
 		try
 		{
+			if (args.Trim().Length == 0)
+				return ReplyAsync("Please provide the number of sides for the N-sided die to roll.");
+			
 			var bits = args.Split(' ', '\t');
 			var sides = long.Parse(bits[0]);
 			
-			return ReplyAsync($"You rolled a {_random.NextInt64(1L, sides + 1)}");
+			return ReplyAsync($"You rolled a {_random.NextInt64(1L, sides + 1)}.");
 		}
 		catch (Exception e)
 		{
