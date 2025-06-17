@@ -9,7 +9,7 @@
         <PackageId>Libexec.RossBot2000</PackageId>
         <Title>RossBot2000</Title>
         <Authors>Ross Nelson</Authors>
-        <Copyright>Copyright © 2023-2004 Ross Nelson</Copyright>
+        <Copyright>Copyright © 2023-2025 Ross Nelson</Copyright>
         <PackageProjectUrl>https://github.com/rnelson/RossBot2000</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/rnelson/RossBot2000/blob/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/rnelson/RossBot2000.git</RepositoryUrl>
@@ -19,9 +19,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Discord.Net" Version="3.16.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="9.0.0" />
+        <PackageReference Include="Discord.Net" Version="3.17.4" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="9.0.6" />
     </ItemGroup>
 
     <ItemGroup>
