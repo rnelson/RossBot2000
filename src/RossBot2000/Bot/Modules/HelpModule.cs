@@ -53,11 +53,11 @@ public class HelpModule(BotConfiguration configuration) : ModuleBase<SocketComma
 
 				if (group != null) groupName = group.Prefix + " ";
 
-				description.Append($"**{_configuration.CommandPrefix}{groupName}{command.Text}**");
+				description.Append($"**{_configuration.CommandPrefix} {groupName}{command.Text}**");
 
 				if (aliases != null)
 					Array.ForEach(aliases.Aliases,
-						a => description.Append($" or **{_configuration.CommandPrefix}{groupName}{(a == "**" ? @"\*\*" : a)}**"));
+						a => description.Append($" or **{_configuration.CommandPrefix} {groupName}{(a == "**" ? @"\*\*" : a)}**"));
 
 				if (summary != null)
 					description.Append($"\n{summary.Text}");
