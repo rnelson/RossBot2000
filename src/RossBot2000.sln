@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{62C7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceModule", "Modules\DiceModule\DiceModule.csproj", "{37A92624-EB48-4AD4-9FB6-3E7BFC963392}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RossBot2000.Module", "RossBot2000.Module\RossBot2000.Module.csproj", "{43D3D530-A4EB-4674-8877-B3359E8DEA5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RossBot2000.Modules", "RossBot2000.Modules\RossBot2000.Modules.csproj", "{43D3D530-A4EB-4674-8877-B3359E8DEA5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrightNightsModule", "Modules\FrightNightsModule\FrightNightsModule.csproj", "{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}"
 EndProject

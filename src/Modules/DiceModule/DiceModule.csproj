@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\RossBot2000.Abstractions\RossBot2000.Abstractions.csproj" />
-        <ProjectReference Include="..\..\RossBot2000.Module\RossBot2000.Module.csproj" />
+        <ProjectReference Include="..\..\RossBot2000.Modules\RossBot2000.Modules.csproj" />
     </ItemGroup>
 
     <ItemGroup>

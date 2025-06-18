@@ -3,12 +3,13 @@ using System.Reflection;
 using System.Text;
 using Discord;
 using Discord.Commands;
+using RossBot2000.Module;
 
 namespace RossBot2000.Bot.Modules;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class HelpModule(BotConfiguration configuration) : ModuleBase<SocketCommandContext>
+public class HelpModule(BotConfiguration configuration, IServiceProvider provider) : ModuleBase<SocketCommandContext>
 {
 	private readonly BotConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
@@ -23,11 +24,11 @@ public class HelpModule(BotConfiguration configuration) : ModuleBase<SocketComma
 			Color = new Color(10, 180, 10)
 		};
 
-		var modules = Assembly
-			.GetExecutingAssembly()
-			.GetTypes()
-			.Where(t => t.IsSubclassOf(typeof(ModuleBase<SocketCommandContext>)))
-			.ToList();
+		var modules = new List<Type>();
+		foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+			modules.AddRange(assembly.GetTypes().Where(t => !t.IsInterface
+			                                                && t != typeof(RossBotModuleBase)
+			                                                && t.IsSubclassOf(typeof(ModuleBase<SocketCommandContext>))));
 
 		var description = new StringBuilder();
 		description.AppendLine();
@@ -35,7 +36,7 @@ public class HelpModule(BotConfiguration configuration) : ModuleBase<SocketComma
 		modules.ForEach(t =>
 		{
 			var moduleName = t.Name.Remove(t.Name.IndexOf("Module", StringComparison.CurrentCulture));
-			description.AppendLine($"**{moduleName} Commands**");
+			description.AppendLine($"## **{moduleName} Commands**");
 
 			var methods = t.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
 

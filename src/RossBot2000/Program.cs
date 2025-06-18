@@ -8,6 +8,7 @@ var host = Host.CreateDefaultBuilder(args)
 		services.AddHostedService<Worker>();
 		services.AddSingleton<BotConfiguration>();
 		services.AddSingleton<DiscordClient>();
+		services.AddSingleton<ModuleLoader>();
 	})
 	.Build();
 

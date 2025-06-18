@@ -5,15 +5,15 @@ using RossBot2000.Abstractions;
 
 namespace RossBot2000.Module;
 
-public class RossBotModuleBase(ILogger<RossBotModuleBase> logger, IConfiguration configuration) : ModuleBase<SocketCommandContext>, IRossBotModule
+public class RossBotModuleBase(ILogger<RossBotModuleBase> logger, IConfiguration configuration) : ModuleBase<SocketCommandContext>
 {
     protected IConfiguration Configuration { get; init; } = configuration
                                                             ?? throw new ArgumentNullException(nameof(configuration));
 
-    public string Name { get; init; } = "<unnamed module>";
+    private const string ModuleName = "<unnamed module>";
 
     public virtual void Initialize()
     {
-        logger.LogInformation("Initializing {name}", Name);
+        logger.LogInformation("Initializing {name}", ModuleName);
     }
 }

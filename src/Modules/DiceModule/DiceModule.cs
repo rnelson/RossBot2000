@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Discord.Commands;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using RossBot2000.Abstractions;
 using RossBot2000.Module;
 
 namespace DiceModule;
@@ -9,16 +10,17 @@ namespace DiceModule;
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
-public class DiceModule(ILogger<DiceModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration)
+public class DiceModule(ILogger<DiceModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration), IRossBotModule
 {
+	private string Name { get; init; } = "DiceModule";
+	
 	private readonly Random _random = new();
 	private readonly List<ulong> _winners = [329744102189039618UL];
 	
-	public new string Name { get; init; } = "DiceModule";
 
 	public override void Initialize()
 	{
-		logger.LogInformation("Initializing DiceModule");
+		logger.LogInformation("Initializing {ModuleName}", Name);
 		
 		logger.LogDebug("Loading list of winners from the configuration");
 		var ids = Configuration
@@ -34,7 +36,7 @@ public class DiceModule(ILogger<DiceModule> logger, IConfiguration configuration
 			.Where(id => !_winners.Contains(id))
 			.ToList());
 		
-		logger.LogDebug("DiceModule initialized");
+		logger.LogDebug("{ModuleName} initialized", Name);
 	}
 	
 	[Command("SavingThrow")]

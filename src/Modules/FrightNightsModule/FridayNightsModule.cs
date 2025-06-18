@@ -2,14 +2,17 @@ using System.Diagnostics.CodeAnalysis;
 using Discord.Commands;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using RossBot2000.Abstractions;
 using RossBot2000.Module;
 
 namespace FrightNightsModule;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class FridayNightsModule(ILogger<FridayNightsModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration)
+public class FridayNightsModule(ILogger<FridayNightsModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration), IRossBotModule
 {
+	private string Name { get; init; } = "FridayNightsModule";
+	
 	[Command("aioli")]
 	[Alias("aaiga")]
 	[Summary("Informs Austin that all aioli is, in fact, garlic aioli.")]
