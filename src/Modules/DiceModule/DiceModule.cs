@@ -18,7 +18,6 @@ public class DiceModule(ILogger<DiceModule> logger, IConfiguration configuration
 	private readonly Random _random = new();
 	private readonly List<ulong> _winners = [329744102189039618UL];
 	
-
 	public override void Initialize()
 	{
 		logger.LogInformation("Initializing {ModuleName}", Name);
