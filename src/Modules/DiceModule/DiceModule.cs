@@ -1,42 +1,40 @@
 using System.Diagnostics.CodeAnalysis;
 using Discord.Commands;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using RossBot2000.Abstractions;
 
-namespace RossBot2000.Bot.Modules;
+namespace DiceModule;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
-public class DiceModule : ModuleBase<SocketCommandContext>
+public class DiceModule(ILogger<DiceModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration)
 {
-	private readonly IConfiguration _configuration; 
 	private readonly Random _random = new();
-	private readonly List<ulong> _winners;
+	private readonly List<ulong> _winners = [329744102189039618UL];
+	
+	public new string Name { get; init; } = "DiceModule";
 
-	public DiceModule(IConfiguration configuration)
+	public override void Initialize()
 	{
-		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-
-		// Start with a permanent list of winners. ;-)
-		_winners = [329744102189039618UL];
+		logger.LogInformation("Initializing DiceModule");
 		
-		try
-		{
-			var ids = _configuration
-				.GetSection("Dice")
-				.GetSection("Winners")
-				.Get<ulong[]>();
+		logger.LogDebug("Loading list of winners from the configuration");
+		var ids = Configuration
+			.GetSection("Dice")
+			.GetSection("Winners")
+			.Get<ulong[]>();
 
-			if (ids is null)
-				throw new("no winners found");
-			
-			_winners.AddRange(ids
-				.Where(id => !_winners.Contains(id))
-				.ToList());
-		}
-		catch
-		{
-			// Do nothing
-		}
+		if (ids is null)
+			throw new("no winners found");
+		
+		logger.LogTrace("Moving list of winner IDs to _winners");
+		_winners.AddRange(ids
+			.Where(id => !_winners.Contains(id))
+			.ToList());
+		
+		logger.LogDebug("DiceModule initialized");
 	}
 	
 	[Command("SavingThrow")]
