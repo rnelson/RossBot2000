@@ -1,5 +1,3 @@
 ﻿namespace RossBot2000.Abstractions;
 
-public interface IRossBotModule
-{
-}
+public interface IRossBotModule;

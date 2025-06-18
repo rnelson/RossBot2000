@@ -9,7 +9,7 @@ namespace RossBot2000.Bot.Modules;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class HelpModule(BotConfiguration configuration, IServiceProvider provider) : ModuleBase<SocketCommandContext>
+public class HelpModule(BotConfiguration configuration) : ModuleBase<SocketCommandContext>
 {
 	private readonly BotConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 

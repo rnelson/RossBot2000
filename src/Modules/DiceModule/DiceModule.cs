@@ -10,10 +10,11 @@ namespace DiceModule;
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
+[SuppressMessage("Performance", "CA1873:Avoid potentially expensive logging")]
 public class DiceModule(ILogger<DiceModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration), IRossBotModule
 {
-	private string Name { get; init; } = "DiceModule";
-	
+	private static string Name => "DiceModule";
+
 	private readonly Random _random = new();
 	private readonly List<ulong> _winners = [329744102189039618UL];
 	

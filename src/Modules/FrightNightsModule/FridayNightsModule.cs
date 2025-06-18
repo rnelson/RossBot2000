@@ -9,10 +9,11 @@ namespace FrightNightsModule;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
+[SuppressMessage("ReSharper", "UnusedMember.Local")]
 public class FridayNightsModule(ILogger<FridayNightsModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration), IRossBotModule
 {
-	private string Name { get; init; } = "FridayNightsModule";
-	
+	private static string Name => "FridayNightsModule";
+
 	[Command("aioli")]
 	[Alias("aaiga")]
 	[Summary("Informs Austin that all aioli is, in fact, garlic aioli.")]

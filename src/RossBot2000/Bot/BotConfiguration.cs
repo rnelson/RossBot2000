@@ -1,21 +1,27 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using RossBot2000.Abstractions;
 
 namespace RossBot2000.Bot;
 
 [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
-public class BotConfiguration : IBotConfiguration
+public class BotConfiguration
 {
 	private readonly ILogger<BotConfiguration> _logger;
 	private readonly IConfiguration _configuration;
 
 	internal string DiscordToken { get; }
 	
-	/// <inheritdoc/>
+	/// <summary>
+	/// The bot's name.
+	/// </summary>
 	public string BotName { get; }
 	
-	/// <inheritdoc/>
+	/// <summary>
+	/// The command prefix.
+	/// </summary>
+	/// <remarks>
+	/// This goes between "!" and the command name.
+	/// </remarks>
 	public string CommandPrefix { get; }
 	
 	public BotConfiguration(ILogger<BotConfiguration> logger, IConfiguration configuration)

@@ -11,14 +11,13 @@ public class ModuleLoader(ILogger<ModuleLoader> logger, IServiceProvider provide
     public async Task LoadModules(CommandService commandService)
     {
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        path = "C:\\dev\\RossBot2000\\dist";
         var moduleDlls = Directory.GetFiles(path, "*Module.dll");
 
         foreach (var dll in moduleDlls)
         {
             try
             {
-                _logger.LogInformation($"Loading module {dll}");
+                _logger.LogInformation("Loading module {Library}", dll);
                 var assembly = Assembly.LoadFile(dll);
                 var types = assembly.GetTypes();
 
