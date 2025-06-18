@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Discord.Commands;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using RossBot2000.Abstractions;
+using RossBot2000.Module;
 
 namespace DiceModule;
 
