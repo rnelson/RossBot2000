@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceModule", "Modules\DiceM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RossBot2000.Module", "RossBot2000.Module\RossBot2000.Module.csproj", "{43D3D530-A4EB-4674-8877-B3359E8DEA5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrightNightsModule", "Modules\FrightNightsModule\FrightNightsModule.csproj", "{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,13 @@ Global
 		{43D3D530-A4EB-4674-8877-B3359E8DEA5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43D3D530-A4EB-4674-8877-B3359E8DEA5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43D3D530-A4EB-4674-8877-B3359E8DEA5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{37A92624-EB48-4AD4-9FB6-3E7BFC963392} = {62C7ED41-5906-434F-97E9-C780FE96242C}
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA} = {62C7ED41-5906-434F-97E9-C780FE96242C}
 	EndGlobalSection
 EndGlobal

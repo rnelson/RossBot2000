@@ -1,11 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
 using Discord.Commands;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using RossBot2000.Module;
 
-namespace RossBot2000.Bot.Modules;
+namespace FrightNightsModule;
 
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class FridayNightsModule : ModuleBase<SocketCommandContext>
+public class FridayNightsModule(ILogger<FridayNightsModule> logger, IConfiguration configuration) : RossBotModuleBase(logger, configuration)
 {
 	[Command("aioli")]
 	[Alias("aaiga")]
