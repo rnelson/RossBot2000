@@ -29,7 +29,7 @@ public class InfoModule(BotConfiguration configuration) : ModuleBase<SocketComma
 		description.AppendLine("\n");
 		description.AppendLine("**License**");
 		description.AppendLine("The RossBot2000 source code is available under");
-		description.AppendLine($"the MIT license. See {_configuration.CommandPrefix}source for more details.");
+		description.AppendLine($"the MIT license. See `{_configuration.CommandPrefix} source` for more details.");
 		description.AppendLine("\n");
 		
 		var embed = new EmbedBuilder
