@@ -10,14 +10,17 @@ public class DiscordClient
 	private readonly ILogger<DiscordClient> _logger;
 	private readonly DiscordSocketClient _client;
 	private readonly IServiceProvider _services;
+	private readonly ModuleLoader _moduleLoader;
 
 	public DiscordClient(BotConfiguration configuration,
 		ILogger<DiscordClient> logger,
-		IServiceProvider services)
+		IServiceProvider services,
+		ModuleLoader moduleLoader)
 	{
 		_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 		_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		_services = services ?? throw new ArgumentNullException(nameof(services));
+		_moduleLoader = moduleLoader ?? throw new ArgumentNullException(nameof(moduleLoader));
 
 		_client = new(new() { GatewayIntents = GatewayIntents.All });
 		_client.Log += ClientOnLog;
@@ -26,9 +29,12 @@ public class DiscordClient
 	public async Task Login()
 	{
 		var commandService = new CommandService();
+		await _moduleLoader.LoadModules(commandService);
+		
 		var handler = new CommandHandler(_configuration, _services, _client, commandService);
 		
 		await handler.InstallCommandsAsync();
+		
 		await _client.LoginAsync(TokenType.Bot, _configuration.DiscordToken);
 		await _client.StartAsync();
 		

@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RossBot2000", "RossBot2000\RossBot2000.csproj", "{6A31BECA-69F9-45C1-AB9E-3E4E8C21FB8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RossBot2000.Abstractions", "RossBot2000.Abstractions\RossBot2000.Abstractions.csproj", "{FE59F92C-4AAA-4001-9159-68601CFE7C29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{62C7ED41-5906-434F-97E9-C780FE96242C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceModule", "Modules\DiceModule\DiceModule.csproj", "{37A92624-EB48-4AD4-9FB6-3E7BFC963392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RossBot2000.Modules", "RossBot2000.Modules\RossBot2000.Modules.csproj", "{43D3D530-A4EB-4674-8877-B3359E8DEA5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrightNightsModule", "Modules\FrightNightsModule\FrightNightsModule.csproj", "{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A31BECA-69F9-45C1-AB9E-3E4E8C21FB8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A31BECA-69F9-45C1-AB9E-3E4E8C21FB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A31BECA-69F9-45C1-AB9E-3E4E8C21FB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A31BECA-69F9-45C1-AB9E-3E4E8C21FB8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE59F92C-4AAA-4001-9159-68601CFE7C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE59F92C-4AAA-4001-9159-68601CFE7C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE59F92C-4AAA-4001-9159-68601CFE7C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE59F92C-4AAA-4001-9159-68601CFE7C29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37A92624-EB48-4AD4-9FB6-3E7BFC963392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37A92624-EB48-4AD4-9FB6-3E7BFC963392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37A92624-EB48-4AD4-9FB6-3E7BFC963392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37A92624-EB48-4AD4-9FB6-3E7BFC963392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43D3D530-A4EB-4674-8877-B3359E8DEA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D3D530-A4EB-4674-8877-B3359E8DEA5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D3D530-A4EB-4674-8877-B3359E8DEA5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D3D530-A4EB-4674-8877-B3359E8DEA5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37A92624-EB48-4AD4-9FB6-3E7BFC963392} = {62C7ED41-5906-434F-97E9-C780FE96242C}
+		{E564EFCE-4A0F-461A-90E8-EA9CAFF63AEA} = {62C7ED41-5906-434F-97E9-C780FE96242C}
+	EndGlobalSection
+EndGlobal

@@ -10,7 +10,18 @@ public class BotConfiguration
 	private readonly IConfiguration _configuration;
 
 	internal string DiscordToken { get; }
+	
+	/// <summary>
+	/// The bot's name.
+	/// </summary>
 	public string BotName { get; }
+	
+	/// <summary>
+	/// The command prefix.
+	/// </summary>
+	/// <remarks>
+	/// This goes between "!" and the command name.
+	/// </remarks>
 	public string CommandPrefix { get; }
 	
 	public BotConfiguration(ILogger<BotConfiguration> logger, IConfiguration configuration)
